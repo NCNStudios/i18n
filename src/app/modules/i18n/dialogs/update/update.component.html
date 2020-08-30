@@ -1,0 +1,42 @@
+<button mat-icon-button class="close-button" (click)="onDismiss()">
+    <mat-icon>close</mat-icon>
+</button>
+<h3 class="dialog_title" mat-dialog-title> Cập nhật bản dịch</h3>
+<div mat-dialog-content class="dialog_content">
+    <form [formGroup]="updateForm" (submit)="onConfirm()" class="updateForm" id="ngupdateForm">
+        <div fxLayout="row" fxLayout.xs="row" fxLayout.sm="row" fxLayoutAlign="space-between" class="frm">
+            <mat-form-field appearance="outline" fxFlex.gt-sm="grow" fxFlex.gt-xs="grow" fxFlex='grow'>
+                <mat-label> Mã lỗi </mat-label>
+                <input matInput formControlName="err" required>
+                <mat-error *ngIf="err.invalid">
+                    <span>Vui lòng nhập mã lỗi</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex.gt-sm="89" fxFlex.gt-xs="89" fxFlex='89'>
+                <mat-label> Tiếng Việt </mat-label>
+                <input matInput formControlName="vi" required>
+                <mat-error *ngIf="vi.invalid">
+                    <span>Vui lòng nhập văn bản Tiếng Việt</span>
+                </mat-error>
+            </mat-form-field>
+
+            <a mat-button fxFlex.gt-sm="10" fxFlex.gt-xs="10" fxFlex='10' class="btn-translate" matTooltip="Mở trong Google Dịch" (click)="translate()">
+                <mat-icon>g_translate</mat-icon>
+            </a>
+
+            <mat-form-field appearance="outline" fxFlex.gt-sm="grow" fxFlex.gt-xs="grow" fxFlex='grow'>
+                <mat-label> Tiếng Anh </mat-label>
+                <input matInput formControlName="en" required>
+                <mat-error *ngIf="en.invalid">
+                    <span>Vui lòng nhập văn bản Tiếng Anh</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="end">
+    <button mat-flat-button fxFlex='20' class="applyBtn" type="submit" form="ngupdateForm">
+        <mat-icon>published_with_changes</mat-icon> Cập nhật
+    </button>
+</div>

@@ -1,0 +1,55 @@
+.main {
+    padding: 2em 1em;
+    flex-wrap: wrap;
+    .mat-card {
+        margin-bottom: 2em;
+        .card-title {
+            text-transform: uppercase;
+            display: flex;
+
+            .mat-icon {
+                vertical-align: middle;
+                align-self: center;
+                color: #263238;
+            }
+
+            .title {
+                margin-left: 0.3em;
+                align-self: center;
+                color: #263238;
+                font-weight: 500;
+            }
+
+            .group-ctrl {
+                margin-left: auto;
+
+                .btn-add {
+                    background-color: rgba(0, 0, 0, 0.08);
+                    color: #263238;
+                }
+
+                .btn-ctrl {
+                    margin-left: .5em;
+                }
+            }
+
+            .btn-ctrl {
+                color: #263238;
+                margin-left: auto;
+            }
+        }
+
+        .hljs {
+            border-radius: 4px;
+            margin-top: -28px !important;
+        }
+
+        .tbl-listTrans {
+            margin-top: 2em;
+
+            table {
+                width: 100%;
+            }
+        }
+    }
+}

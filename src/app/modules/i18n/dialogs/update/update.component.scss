@@ -1,0 +1,88 @@
+.dialog_title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: #1e2024;
+}
+
+::ng-deep .applyBtn {
+    margin-top: 1em;
+    background-color: rgb(0, 107, 255);
+    color: #ffffff;
+    height: 3em;
+}
+
+.close-button {
+    float: right;
+    top: -24px;
+    right: -24px;
+}
+
+.dialog_content {
+    font-size: 15px;
+}
+
+::ng-deep .dialog_content .updateForm {
+    padding-top: 0.5em;
+
+    .frm {
+        flex-wrap: wrap;
+
+        .btn-translate {
+            background-color: #eaebeb;
+            height: 3.6em;
+            margin-top: 0.25em;
+            justify-content: center;
+
+            .mat-icon {
+                padding-top: .5em;
+            }
+        }
+    }
+
+    .mat-form-field-appearance-outline {
+        .mat-form-field-outline {
+            color: transparent;
+            background-color: #eaebeb;
+            border-radius: 5px;
+        }
+
+        .mat-form-field-outline-thick {
+            color: #dddddd;
+        }
+
+        .mat-form-field-infix {
+            padding: 0.8em 0;
+        }
+
+        &.mat-form-field-can-float {
+            &.mat-form-field-should-float {
+                .mat-form-field-label {
+                    color: #ce7a58;
+                    transform: translateY(-1.55em) scale(1);
+                    margin-bottom: 1em;
+                }
+            }
+        }
+    }
+
+    .searchBtn {
+        margin-top: 0.3em;
+        background-color: #ce7a58;
+        color: #fff;
+        height: 3.2em;
+    }
+
+    .mat-form-field-label-wrapper {
+        top: -1em;
+    }
+
+    .mat-form-field.mat-focused {
+        .mat-form-field-label {
+            color: #ce7a58;
+            font-size: 14px;
+        }
+    }
+
+
+}
