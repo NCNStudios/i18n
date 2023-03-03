@@ -55,7 +55,6 @@ export class AddMultipleComponent implements OnInit {
         }
       }
     }
-    console.log(this.listSplited);
   }
 
   onConfirm(): void {
