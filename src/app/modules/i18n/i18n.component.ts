@@ -7,6 +7,7 @@ import { AddComponent, ConfirmAddDialogModel } from './dialogs/add/add.component
 import { UpdateComponent, ConfirmUpdateDialogModel } from './dialogs/update/update.component';
 import { DeleteComponent, ConfirmDeleteDialogModel } from './dialogs/delete/delete.component';
 import { DeleteAllComponent, ConfirmDeleteAllDialogModel } from './dialogs/delete-all/delete-all.component';
+import { AddMultipleComponent, ConfirmAddMultiDialogModel } from './dialogs/add-multiple/add-multiple.component';
 
 export interface PeriodicElement {
   id: string;
@@ -60,6 +61,25 @@ export class I18nComponent implements OnInit {
   add(): void {
     const dialogData = new ConfirmAddDialogModel();
     const dialogRef = this.dialog.open(AddComponent, {
+      width: '50vw',
+      data: dialogData,
+      disableClose: false,
+      position: {
+        top: '10em'
+      },
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult === true) {
+        this.getListTrans();
+        this.snackbar.openSnackBar('Thêm mới', 'bản dịch', 'thành công!', '', 'success_notification');
+      }
+    });
+  }
+
+  addMulti(): void {
+    const dialogData = new ConfirmAddMultiDialogModel();
+    const dialogRef = this.dialog.open(AddMultipleComponent, {
       width: '50vw',
       data: dialogData,
       disableClose: false,

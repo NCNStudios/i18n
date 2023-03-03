@@ -1,0 +1,29 @@
+<button mat-icon-button class="close-button" (click)="onDismiss()">
+    <mat-icon>close</mat-icon>
+</button>
+<h3 class="dialog_title" mat-dialog-title> Thêm bản dịch</h3>
+<div mat-dialog-content class="dialog_content">
+    <form [formGroup]="addForm" (submit)="onConfirm()" class="addForm" id="ngAddForm">
+        <div fxLayout="row" fxLayout.xs="row" fxLayout.sm="row" fxLayoutAlign="space-between" class="frm">
+            <mat-form-field appearance="outline" fxFlex.gt-sm="grow" fxFlex.gt-xs="grow" fxFlex='grow'>
+                <mat-label> Mã lỗi </mat-label>
+                <textarea matInput formControlName="err" rows="5" (input)="split()"></textarea>
+            </mat-form-field>
+        </div>
+    </form>
+    <div class="listSplited">
+        <div class="item" *ngFor="let item of listSplited">
+            <div class="left">
+                <span>{{item.code}}</span>
+                <span>{{item.textVi}}</span>
+                <span>{{item.textEn}}</span>
+            </div>
+            <button mat-icon-button><mat-icon>g_translate</mat-icon></button>
+        </div>
+    </div>
+</div>
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="end">
+    <button mat-flat-button fxFlex='20' class="applyBtn" type="submit" form="ngAddForm">
+        <mat-icon>check</mat-icon> Thêm
+    </button>
+</div>

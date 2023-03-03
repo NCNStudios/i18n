@@ -7,10 +7,11 @@ import { AddComponent } from './dialogs/add/add.component';
 import { UpdateComponent } from './dialogs/update/update.component';
 import { DeleteComponent } from './dialogs/delete/delete.component';
 import { DeleteAllComponent } from './dialogs/delete-all/delete-all.component';
+import { AddMultipleComponent } from './dialogs/add-multiple/add-multiple.component';
 
 
 @NgModule({
-  declarations: [I18nComponent, AddComponent, UpdateComponent, DeleteComponent, DeleteAllComponent],
+  declarations: [I18nComponent, AddComponent, UpdateComponent, DeleteComponent, DeleteAllComponent, AddMultipleComponent],
   imports: [
     CommonModule,
     I18nRoutingModule,
