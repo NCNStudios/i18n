@@ -28,10 +28,8 @@ export class I18nComponent implements OnInit {
   ELEMENTDATA: PeriodicElement[] = [];
   dataSource: MatTableDataSource<PeriodicElement>;
 
-  code = `function myFunction() {
-    document.getElementById("demo1").innerHTML = "Hello there!";
-    document.getElementById("demo2").innerHTML = "How are you?";
-  }`;
+  codeVi = '';
+  codeEn = '';
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -47,15 +45,34 @@ export class I18nComponent implements OnInit {
     this.getListTrans();
   }
 
-  getListTrans(): void {
-    const local = localStorage.getItem('listTrans');
-    this.listTrans = JSON.parse(local);
+  getListTrans() {
+    const t = localStorage.getItem("listTrans");
+    this.listTrans = JSON.parse(t);
     this.ELEMENTDATA = [];
-    this.listTrans.forEach((data, index) => {
-      data.stt = index + 1;
-      this.ELEMENTDATA.push(data);
-    });
-    this.dataSource.data = this.ELEMENTDATA;
+    this.codeVi = "";
+    this.codeEn = "";
+    this.listTrans.forEach((t, n) => {
+      t.stt = n + 1,
+        this.ELEMENTDATA.push(t)
+    }
+    ),
+      this.dataSource.data = this.ELEMENTDATA,
+      this.convertToVi(),
+      this.convertToEn()
+  }
+  convertToVi() {
+    this.codeVi = "",
+      this.listTrans.forEach(t => {
+        this.codeVi += '<trans-unit id="' + t.id + '" datatype="html">\n  <source>' + t.en + "</source>\n  <target>" + t.vi + "</target>\n</trans-unit>\n"
+      }
+      )
+  }
+  convertToEn() {
+    this.codeEn = "",
+      this.listTrans.forEach(t => {
+        this.codeEn += '<trans-unit id="' + t.id + '" datatype="html">\n  <source>' + t.en + "</source>\n  <target>" + t.en + "</target>\n</trans-unit>\n"
+      }
+      )
   }
 
   add(): void {
