@@ -8,6 +8,8 @@ import { UpdateComponent } from './dialogs/update/update.component';
 import { DeleteComponent } from './dialogs/delete/delete.component';
 import { DeleteAllComponent } from './dialogs/delete-all/delete-all.component';
 import { AddMultipleComponent } from './dialogs/add-multiple/add-multiple.component';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +17,7 @@ import { AddMultipleComponent } from './dialogs/add-multiple/add-multiple.compon
   imports: [
     CommonModule,
     I18nRoutingModule,
-    SharedModule
+    SharedModule, TextFieldModule, FormsModule
   ]
 })
 export class I18nModule { }

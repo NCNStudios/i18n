@@ -100,9 +100,6 @@ export class I18nComponent implements OnInit {
       width: '50vw',
       data: dialogData,
       disableClose: false,
-      position: {
-        top: '10em'
-      },
       autoFocus: false
     });
     dialogRef.afterClosed().subscribe(dialogResult => {

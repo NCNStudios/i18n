@@ -5,11 +5,34 @@
     color: #1e2024;
 }
 
-::ng-deep .applyBtn {
+::ng-deep .controller {
     margin-top: 1em;
-    background-color: rgb(0, 107, 255);
-    color: #ffffff;
-    height: 3em;
+    display: flex;
+    flex-direction: row;
+    .left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .loading {
+            margin-left: 5px;
+            &.mat-progress-spinner circle,
+            &.mat-spinner circle {
+                stroke: #2a79ff !important;
+            }
+        }
+    }
+    .applyBtn {
+        height: 3em;
+        background-color: rgb(0, 107, 255);
+        color: #ffffff;
+        margin-left: auto;
+    }
+    .translateBtn {
+        color: rgb(0, 107, 255);
+        margin-right: auto;
+        height: 3em;
+    }
 }
 
 .close-button {
@@ -20,6 +43,30 @@
 
 .dialog_content {
     font-size: 15px;
+}
+
+.textarea-inline-control {
+    flex: 1;
+    border-color: transparent;
+    padding: 7px 7px 8px;
+    line-height: 1.28;
+    resize: none;
+    box-shadow: transparent 0px 0px 0px 1px;
+    transition: background 0.1s ease 0s;
+    overflow: auto;
+    overflow-y: hidden;
+    border-radius: 3px;
+    appearance: none;
+    font-family: "Roboto";
+
+    &:hover:not(:focus) {
+        background-color: rgb(235, 236, 240);
+    }
+
+    &:focus {
+        background-color: rgb(235, 236, 240);
+        outline: none;
+    }
 }
 
 ::ng-deep .dialog_content .addForm {
@@ -107,19 +154,27 @@
             flex-direction: column;
             align-self: center;
             font-size: 14px;
+            width: 90%;
             span {
                 &:nth-child(1) {
                     color: rgb(0 0 0 / 54%);
                 }
-                &:nth-child(2) {
-                    color: #1e2024;
-                    margin-top: 1em;
+            }
+            .trans {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-top: 0.2em;
+                img {
+                    margin-right: 0.5em;
                 }
             }
         }
         button {
             align-self: center;
             margin-left: auto;
+            font-size: 12px;
+            color: #de1212;
         }
     }
 }

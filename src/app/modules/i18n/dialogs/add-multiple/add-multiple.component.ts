@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SnackbarService } from 'src/app/data/service/snackbar/snackbar.service';
+import { TranslateService } from 'src/app/data/service/translate/translate.service';
 import { AddComponent } from '../add/add.component';
 
 @Component({
@@ -21,10 +23,13 @@ export class AddMultipleComponent implements OnInit {
   translateWindow: any;
   isTranslated = false;
   listTrans = [];
+  isTranslating = false;
 
   constructor(
     public dialogRef: MatDialogRef<AddMultipleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmAddMultiDialogModel,
+    private translateService: TranslateService,
+    private snackbar: SnackbarService
   ) { }
 
   ngOnInit(): void {
@@ -57,21 +62,25 @@ export class AddMultipleComponent implements OnInit {
     }
   }
 
-  onConfirm(): void {
-    if (this.addForm.invalid === false) {
-      if (this.isTranslated === true) {
-        this.closeWin();
+  remove(code) {
+    this.listSplited.forEach((element, index) => {
+      if (element.code === code) {
+        this.listSplited.splice(index, 1);
       }
-      const formOBJ = this.addForm.getRawValue();
+    });
+  }
+
+  async onConfirm(): Promise<void> {
+    for await (const item of this.listSplited) {
       this.listTrans.push({
-        id: formOBJ.err,
-        vi: formOBJ.vi,
-        en: formOBJ.en,
+        id: item.code,
+        vi: item.textVi,
+        en: item.textEn,
         created: new Date().getTime()
       });
       localStorage.setItem('listTrans', JSON.stringify(this.listTrans));
-      this.dialogRef.close(true);
     }
+    this.dialogRef.close(true);
   }
 
   onDismiss(): void {
@@ -81,11 +90,33 @@ export class AddMultipleComponent implements OnInit {
     this.dialogRef.close(false);
   }
 
-  translate(): void {
-    this.isTranslated = true;
-    const formOBJ = this.addForm.getRawValue();
-    const link = 'https://translate.google.com/#view=home&op=translate&sl=vi&tl=en&text=' + formOBJ.vi;
-    this.translateWindow = window.open(link, '_blank', 'resizable=no, toolbar=no, scrollbars=no, menubar=no, status=no, directories=no,top=50,left=500,width=400,height=500');
+  async translate(): Promise<void> {
+    this.isTranslating = true;
+    let requestBody = {
+      from: "vi",
+      to: "en",
+      e: "",
+      q: []
+    }
+    for await (const item of this.listSplited) {
+      requestBody.q.push(item.textVi);
+    }
+    const reBody = JSON.stringify(requestBody, null, 2);
+    this.translateService.postTranslate(reBody).subscribe(async data => {
+      let index = 0;
+      for await (const trans of data) {
+        this.listSplited[index].textEn = trans;
+        index++;
+      }
+      setTimeout(() => {
+        this.isTranslating = false;
+      }, 1000);
+    }, err => {
+      this.snackbar.openSnackBar('Chuyển đổi', 'bản dịch', 'thất bại!', '', 'error_notification');
+      setTimeout(() => {
+        this.isTranslating = false;
+      }, 1000);
+    });
   }
 
   closeWin(): void {

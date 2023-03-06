@@ -15,14 +15,26 @@
         <div class="item" *ngFor="let item of listSplited">
             <div class="left">
                 <span>{{item.code}}</span>
-                <span>{{item.textVi}}</span>
-                <span>{{item.textEn}}</span>
+                <div class="trans">
+                    <img src="https://cdn-icons-png.flaticon.com/512/299/299728.png" alt="" width="24" height="24">
+                    <textarea [(ngModel)]="item.textVi" class="textarea-inline-control" cdkTextareaAutosize></textarea>
+                </div>
+                <div class="trans">
+                    <img src="https://cdn-icons-png.flaticon.com/512/6070/6070141.png" alt="" width="24" height="24">
+                    <textarea [(ngModel)]="item.textEn" class="textarea-inline-control" cdkTextareaAutosize></textarea>
+                </div>
             </div>
-            <button mat-icon-button><mat-icon>g_translate</mat-icon></button>
+            <button mat-icon-button class="right" (click)="remove(item.code)"><mat-icon>close</mat-icon></button>
         </div>
     </div>
 </div>
-<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="end">
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="end" class="controller">
+    <div class="left">
+        <button mat-icon-button class="translateBtn" *ngIf="!isTranslating" (click)="translate()">
+            <mat-icon>translate</mat-icon>
+        </button>
+        <mat-spinner class="loading" [diameter]="25" *ngIf="isTranslating"></mat-spinner>
+    </div>
     <button mat-flat-button fxFlex='20' class="applyBtn" type="submit" form="ngAddForm">
         <mat-icon>check</mat-icon> Thêm
     </button>
